@@ -10,3 +10,7 @@ __pycache__/
 
 # Sensitive or environment-specific files
 config/settings.py
+
+# Historical data
+historical_data/
+*.csv
