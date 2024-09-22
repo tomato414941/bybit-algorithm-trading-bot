@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+
+# Logs
+*.log
+
+# Sensitive or environment-specific files
+config/settings.py
