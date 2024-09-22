@@ -3,7 +3,7 @@
 import time
 
 from data.market_data import MarketData
-from strategies.simple_strategy import SimpleMovingAverageCrossover
+from strategies.sma_strategy import SimpleMovingAverageCrossover
 from trading.order import OrderManager
 from utils.logger import logger
 from utils.risk_management import RiskManager
