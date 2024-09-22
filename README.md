@@ -10,6 +10,7 @@ bybit-algorithm-trading-bot is an automated cryptocurrency trading bot designed 
 - Automated order execution
 - Risk management with stop-loss and take-profit
 - Comprehensive logging and monitoring
+- Historical data fetching and storage
 
 ## Prerequisites
 
@@ -30,7 +31,10 @@ bybit-algorithm-trading-bot is an automated cryptocurrency trading bot designed 
    ```
 
 3. Set up your Bybit API credentials:
-   - Edit `config/settings.py` and add your Bybit API key and secret
+   ```
+   cp config/settings.example.py config/settings.py
+   ```
+   Then edit `config/settings.py` and add your Bybit API key and secret.
 
 ## Project Structure
 
@@ -38,33 +42,56 @@ bybit-algorithm-trading-bot is an automated cryptocurrency trading bot designed 
 bybit-algorithm-trading-bot/
 │
 ├── config/
-│   └── settings.py           # Configuration file (API keys, trading parameters, etc.)
+│   ├── __init__.py
+│   ├── settings.example.py   # Example configuration file
+│   └── settings.py           # Actual configuration file (gitignored)
 │
 ├── data/
+│   ├── __init__.py
 │   └── market_data.py        # Market data fetching and processing
 │
 ├── strategies/
+│   ├── __init__.py
 │   └── sma_strategy.py       # Simple Moving Average Crossover strategy
 │
 ├── trading/
+│   ├── __init__.py
 │   ├── exchange.py           # Interaction with Bybit API
 │   └── order.py              # Order management
 │
 ├── utils/
+│   ├── __init__.py
 │   ├── logger.py             # Logging functionality
 │   └── risk_management.py    # Risk management utilities
 │
+├── historical_data/          # Directory for storing historical data (gitignored)
+│
+├── logs/                     # Directory for storing log files (gitignored)
+│
 ├── check_account_balance.py  # Utility to check account balance
 ├── check_bybit_api_responses.py  # Utility to check API responses
+├── check_positions.py        # Utility to check current positions
+├── fetch_historical_data.py  # Script to fetch and save historical data
 ├── main.py                   # Main entry point
 ├── requirements.txt          # Dependencies
+├── .gitignore                # Git ignore file
 └── README.md                 # Project description
 ```
 
 ## Usage
 
-1. Configure the bot in `config/settings.py`.
-2. To start the trading bot, run:
+1. Configure the bot:
+   ```
+   cp config/settings.example.py config/settings.py
+   ```
+   Edit `config/settings.py` with your Bybit API credentials and desired settings.
+
+2. Fetch historical data:
+   ```
+   python fetch_historical_data.py
+   ```
+
+3. To start the trading bot, run:
    ```
    python main.py
    ```
@@ -94,10 +121,14 @@ The bot includes basic risk management features:
 
 - `check_account_balance.py`: Use this script to check your account balance.
 - `check_bybit_api_responses.py`: Use this script to test API responses for various data endpoints.
+- `check_positions.py`: Use this script to check your current positions.
+- `fetch_historical_data.py`: Use this script to fetch and save historical data.
 
 ## Logging
 
-The bot logs all activities and errors to a file specified in the settings. You can adjust the log level in the settings file.
+The bot logs all activities and errors to files in the `logs/` directory. The log file is specified in the `config/settings.py` file. You can adjust the log level and file path in the settings.
+
+The `logs/` directory is automatically created when the bot runs. Log files are not tracked by git to avoid cluttering the repository.
 
 ## Disclaimer
 
